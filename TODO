@@ -1,0 +1,6 @@
+Algorithm may be like this:
+* Check for USB webcams connected
+* List possible webcams and let user select
+* Send lsusb output to me when no camera is found and maybe take email address to notify user
+* Install required driver package
+* Show a webcam output window
