@@ -25,9 +25,9 @@ except:
     print "\033[31mWarning: You have to install PyQt4 on your system\033[0m"
 
 def compileui(path, uiFile):
-    compiled = os.system("pyuic4 %s%s.ui -o kamera/%s.py" % (path, uiFile, uiFile))
+    compiled = os.system("pyuic4 %s%s.ui -o kamera/%s_ui.py" % (path, uiFile, uiFile))
     if compiled == 0:
-        print "Compiled %s%s.ui -> kamera/%s.py" % (path, uiFile, uiFile)
+        print "Compiled %s%s.ui -> kamera/%s_ui.py" % (path, uiFile, uiFile)
     else:
         print "\033[31mWarning: Failed compiling %s%s.ui, pyuic4 didn't work\033[0m" % (path, uiFile)
 
