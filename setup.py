@@ -25,16 +25,16 @@ except:
     print "\033[31mWarning: You have to install PyQt4 on your system\033[0m"
 
 def compileui(path, uiFile):
-    compiled = os.system("pyuic4 %s%s.ui -o kotaci/%s.py" % (path, uiFile, uiFile))
+    compiled = os.system("pyuic4 %s%s.ui -o kamera/%s.py" % (path, uiFile, uiFile))
     if compiled == 0:
-        print "Compiled %s%s.ui -> kotaci/%s.py" % (path, uiFile, uiFile)
+        print "Compiled %s%s.ui -> kamera/%s.py" % (path, uiFile, uiFile)
     else:
         print "\033[31mWarning: Failed compiling %s%s.ui, pyuic4 didn't work\033[0m" % (path, uiFile)
 
 def compileqrc(path, qrcFile):
-    compiled = os.system("pyrcc4 %s%s.qrc -o kotaci/%s_rc.py" % (path, qrcFile, qrcFile))
+    compiled = os.system("pyrcc4 %s%s.qrc -o kamera/%s_rc.py" % (path, qrcFile, qrcFile))
     if compiled == 0:
-        print "Compiled %s%s.qrc -> kotaci/%s_rc.py" % (path, qrcFile, qrcFile)
+        print "Compiled %s%s.qrc -> kamera/%s_rc.py" % (path, qrcFile, qrcFile)
     else:
         print "\033[31mWarning: Failed compiling %s%s.qrc, pyrcc4 didn't work\033[0m" % (path, qrcFile)
 
@@ -59,12 +59,14 @@ class myClean(clean):
 class myBuild(build):
     def run(self):
         build.run(self)
-        for ui in (
-                ("ui/", "mainwindow"),
-                ):
-            compileui(ui[0], ui[1])
-        if os.system("lrelease-qt4 data/kotaci_tr_TR.ts -qm data/kamera_tr_TR.qm") == 0:
-            print "Compiled data/kotaci_tr_TR.ts -> data/kamera_tr_TR.qm"
+        try:
+            uiFiles = [("ui/", file[:-3]) for file in os.listdir("ui")[1:]]
+            for ui in uiFiles:
+                compileui(ui[0], ui[1])
+        except TypeError:
+            print "No .ui files to compile"
+        if os.system("lrelease-qt4 data/kamera_tr_TR.ts -qm data/kamera_tr_TR.qm") == 0:
+            print "Compiled data/kamera_tr_TR.ts -> data/kamera_tr_TR.qm"
         else:
             print "\033[31mWarning: Failed compiling data/kamera_tr_TR.ts, lrelease-qt4 didn't work\033[0m"
         for qrc in (("data/", "kamera"),):
