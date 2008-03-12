@@ -1,0 +1,31 @@
+# populated from http://cekirdek.pardus.org.tr/~onur/distfiles/pwc-v4l2-20070616-042702.tar.bz2 pwc-if.c
+	{ USB_DEVICE(0x0471, 0x0302) },
+	{ USB_DEVICE(0x0471, 0x0303) },
+	{ USB_DEVICE(0x0471, 0x0304) },
+	{ USB_DEVICE(0x0471, 0x0307) },
+	{ USB_DEVICE(0x0471, 0x0308) },
+	{ USB_DEVICE(0x0471, 0x030C) },
+	{ USB_DEVICE(0x0471, 0x0310) },
+	{ USB_DEVICE(0x0471, 0x0311) }, /* Philips ToUcam PRO II */
+	{ USB_DEVICE(0x0471, 0x0312) },
+	{ USB_DEVICE(0x0471, 0x0313) }, /* the 'new' 720K */
+	{ USB_DEVICE(0x0471, 0x0329) }, /* Philips SPC 900NC PC Camera */
+	{ USB_DEVICE(0x069A, 0x0001) }, /* Askey */
+	{ USB_DEVICE(0x046D, 0x08B0) }, /* Logitech QuickCam Pro 3000 */
+	{ USB_DEVICE(0x046D, 0x08B1) }, /* Logitech QuickCam Notebook Pro */
+	{ USB_DEVICE(0x046D, 0x08B2) }, /* Logitech QuickCam Pro 4000 */
+	{ USB_DEVICE(0x046D, 0x08B3) }, /* Logitech QuickCam Zoom (old model) */
+	{ USB_DEVICE(0x046D, 0x08B4) }, /* Logitech QuickCam Zoom (new model) */
+	{ USB_DEVICE(0x046D, 0x08B5) }, /* Logitech QuickCam Orbit/Sphere */
+	{ USB_DEVICE(0x046D, 0x08B6) }, /* Cisco VT Camera */
+	{ USB_DEVICE(0x046D, 0x08B7) }, /* Logitech ViewPort AV 100 */
+	{ USB_DEVICE(0x046D, 0x08B8) }, /* Logitech (reserved) */
+	{ USB_DEVICE(0x055D, 0x9000) }, /* Samsung MPC-C10 */
+	{ USB_DEVICE(0x055D, 0x9001) }, /* Samsung MPC-C30 */
+	{ USB_DEVICE(0x055D, 0x9002) },	/* Samsung SNC-35E (Ver3.0) */
+	{ USB_DEVICE(0x041E, 0x400C) }, /* Creative Webcam 5 */
+	{ USB_DEVICE(0x041E, 0x4011) }, /* Creative Webcam Pro Ex */
+	{ USB_DEVICE(0x04CC, 0x8116) }, /* Afina Eye */
+	{ USB_DEVICE(0x06BE, 0x8116) }, /* new Afina Eye */
+	{ USB_DEVICE(0x0d81, 0x1910) }, /* Visionite */
+	{ USB_DEVICE(0x0d81, 0x1900) },

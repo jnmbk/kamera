@@ -29,6 +29,23 @@ def gspcaList():
                 )
     return devices
 
+def pwcList():
+    devices = []
+    for line in open("drivers/pwc.txt").readlines()[1:]:
+        if not '*' in line:
+            line += " /* Generic Philips Webcam */"
+        devices.append(
+                (
+                    1, # driver_id
+                    "%s:%s" % ( # device_id
+                        line[line.find('0x') + 2:][:4],
+                        line[line.find('0x', line.find('0x') + 1) + 2:][:4]
+                        ),
+                    line[line.rfind("/*") + 3:line.rfind("*/") - 1] # description
+                    )
+                )
+    return devices
+
 def sn9c1xxList():
     devices = []
     for line in open("drivers/sn9c1xx.txt").readlines()[1:]:
@@ -47,6 +64,8 @@ def sn9c1xxList():
 con = sqlite.connect("webcams.db")
 cur = con.cursor()
 
-cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", tuple(gspcaList()))
+cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", gspcaList())
+cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", pwcList())
+cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", sn9c1xxList())
 con.commit()
 con.close()
