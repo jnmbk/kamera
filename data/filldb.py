@@ -29,6 +29,21 @@ def gspcaList():
                 )
     return devices
 
+def sn9c1xxList():
+    devices = []
+    for line in open("drivers/sn9c1xx.txt").readlines()[1:]:
+        devices.append(
+                (
+                    4, # driver_id
+                    "%s:%s" % ( # device_id
+                        line[line.find('0x') + 2:][:4],
+                        line[line.find('0x', line.find('0x') + 1) + 2:][:4]
+                        ),
+                    line[line.rfind("_") + 1:line.rfind(")")] # description
+                    )
+                )
+    return devices
+
 con = sqlite.connect("webcams.db")
 cur = con.cursor()
 
