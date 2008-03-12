@@ -64,8 +64,11 @@ def sn9c1xxList():
 con = sqlite.connect("webcams.db")
 cur = con.cursor()
 
-cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", gspcaList())
-cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", pwcList())
-cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", sn9c1xxList())
+devices = []
+devices.extend(gspcaList())
+devices.extend(pwcList())
+devices.extend(sn9c1xxList())
+
+cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", devices)
 con.commit()
 con.close()
