@@ -28,6 +28,20 @@ def gspcaList():
                 )
     return devices
 
+def linux_uvcList():
+    devices = []
+    info = [7, "0000:0000", "Generic camera"] # template
+    for line in open("drivers/linux-uvc.txt").readlines()[1:]:
+        if "/*" in line:
+            info[2] = line[line.find("/*") + 3:line.rfind("*/") - 1] # description
+        elif "Vendor" in line:
+            info[1] = line[line.rfind("0x") + 2:][:4]
+        elif "Product" in line:
+            info[1] += ":%s" % line[line.rfind("0x") + 2:][:4]
+        elif "driver_info" in line:
+            devices.append(tuple(info))
+    return devices
+
 def pwcList():
     devices = []
     for line in open("drivers/pwc.txt").readlines()[1:]:
@@ -111,9 +125,11 @@ def zr364xxList():
 
 devices = []
 devices.extend(gspcaList())
+devices.extend(linux_uvcList())
 devices.extend(pwcList())
 devices.extend(r5u870List())
 devices.extend(sn9c1xxList())
+devices.extend(syntekdriverList())
 devices.extend(zr364xxList())
 
 def filldb():
