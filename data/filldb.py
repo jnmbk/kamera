@@ -72,6 +72,28 @@ def sn9c1xxList():
                 )
     return devices
 
+def syntekdriverList():
+    devices = []
+    vendors = []
+    counter = -1
+    for line in open("drivers/syntekdriver.txt").readlines()[1:]:
+        if "VENDOR" in line:
+            vendors.append(line[line.find("0x") + 2:][:4])
+        elif "PRODUCT" in line:
+            devices.append(
+                    (
+                        6, # driver_id
+                        "%s:%s" % ( # device_id
+                            vendors[counter],
+                            line[line.find("0x") + 2:][:4],
+                            ),
+                        line[line.rfind("camera") + 7:line.rfind('*') - 1] # description
+                        )
+                    )
+        else:
+            counter += 1
+    return devices
+
 def zr364xxList():
     devices = []
     for line in open("drivers/zr364xx.txt").readlines()[1:]:

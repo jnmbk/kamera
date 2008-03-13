@@ -1,0 +1,12 @@
+# populated from http://mesh.dl.sourceforge.net/syntekdriver/stk11xx-1.3.1.tar.gz stk11xx.h
+#define USB_SYNTEK1_VENDOR_ID		0x174f						/**< Vendor ID of the camera */
+#define USB_SYNTEK2_VENDOR_ID		0x05e1						/**< Vendor ID of the camera */
+
+#define USB_STK_A311_PRODUCT_ID		0xa311						/**< Product ID of the camera STK-1125 */
+#define USB_STK_A821_PRODUCT_ID		0xa821						/**< Product ID of the camera STK-1135 */
+#define USB_STK_6A31_PRODUCT_ID		0x6a31						/**< Product ID of the camera DC-NEW */
+#define USB_STK_6A33_PRODUCT_ID		0x6a33						/**< Product ID of the camera DC-NEW */
+#define USB_STK_6A51_PRODUCT_ID		0x6a51						/**< Product ID of the camera DC-NEW */
+#define USB_STK_6A54_PRODUCT_ID		0x6a54						/**< Product ID of the camera DC-NEW */
+
+#define USB_STK_0501_PRODUCT_ID		0x0501						/**< Product ID of the camera DC-1125 */
