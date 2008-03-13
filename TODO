@@ -4,3 +4,7 @@ Algorithm may be like this:
 * Send lsusb output to me when no camera is found and maybe take email address to notify user
 * Install required driver package
 * Show a webcam output window
+
+Drivers to be checked:
+* ov511
+* qc-usb
