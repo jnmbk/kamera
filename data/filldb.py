@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-from pysqlite2 import dbapi2 as sqlite
 
 def gspcaList():
     devices = []
@@ -56,19 +55,39 @@ def sn9c1xxList():
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
-                    line[line.rfind("_") + 1:line.rfind(")")] # description
+                    line[line.rfind('_') + 1:line.rfind(')')] # description
                     )
                 )
     return devices
 
-con = sqlite.connect("webcams.db")
-cur = con.cursor()
+def zr364xxList():
+    devices = []
+    for line in open("drivers/zr364xx.txt").readlines()[1:]:
+        devices.append(
+                (
+                    3, # driver_id
+                    "%s:%s" % ( # device_id
+                        line[line.find('0x') + 2:][:4],
+                        line[line.find('0x', line.find('0x') + 1) + 2:][:4]
+                        ),
+                    line[line.rfind(" \"") + 2:line.rfind('"')] # description
+                    )
+                )
+    return devices
 
 devices = []
 devices.extend(gspcaList())
 devices.extend(pwcList())
 devices.extend(sn9c1xxList())
+devices.extend(zr364xxList())
 
-cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", devices)
-con.commit()
-con.close()
+def filldb():
+    from pysqlite2 import dbapi2 as sqlite
+    con = sqlite.connect("webcams.db")
+    cur = con.cursor()
+    cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", devices)
+    con.commit()
+    con.close()
+
+if __name__ == "__main__":
+    filldb()
