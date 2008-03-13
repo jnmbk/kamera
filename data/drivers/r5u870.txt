@@ -1,0 +1,9 @@
+# populated from http://cekirdek.pardus.org.tr/~ismail/dist/others/r5u870-0.10.0.tgz README
+05ca:1810 HP Pavilion Webcam - UVC
+05ca:1830 Sony Visual Communication Camera VGP-VCC2 (for VAIO SZ)
+05ca:1832 Sony Visual Communication Camera VGP-VCC3 (for VAIO UX)
+05ca:1833 Sony Visual Communication Camera VGP-VCC2 (for VAIO AR1)
+05ca:1834 Sony Visual Communication Camera VGP-VCC2 (for VAIO AR2)
+05ca:1835 Sony Visual Communication Camera VGP-VCC5 (for VAIO SZ)
+05ca:1836 Sony Visual Communication Camera VGP-VCC4 (for VAIO FE)
+05ca:1870 HP Pavilion Webcam / HP Webcam 1000

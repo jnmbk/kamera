@@ -45,6 +45,18 @@ def pwcList():
                 )
     return devices
 
+def r5u870List():
+    devices = []
+    for line in open("drivers/r5u870.txt").readlines()[1:]:
+        devices.append(
+                (
+                    5, # driver_id
+                    line[:9], # device_id
+                    line[10:-1] # description
+                    )
+                )
+    return devices
+
 def sn9c1xxList():
     devices = []
     for line in open("drivers/sn9c1xx.txt").readlines()[1:]:
@@ -78,6 +90,7 @@ def zr364xxList():
 devices = []
 devices.extend(gspcaList())
 devices.extend(pwcList())
+devices.extend(r5u870List())
 devices.extend(sn9c1xxList())
 devices.extend(zr364xxList())
 
