@@ -28,6 +28,25 @@ def gspcaList():
                 )
     return devices
 
+def ov511List():
+    devices = []
+    for line in open("drivers/ov511.txt").readlines()[1:]:
+        if "VEND" in line:
+            vendor = (line[line.rfind("0x") + 2:][:4], line[line.find('_') + 1:line.rfind('\t')])
+        if "PROD" in line:
+            devices.append((
+                    8, # driver_id
+                    "%s:%s" % ( # device_id
+                        vendor[0],
+                        line[line.rfind("0x") + 2:][:4]
+                        ),
+                    "%s %s" % ( # description
+                        vendor[1],
+                        line[line.find('_') + 1:line.rfind('\t')]
+                        )
+                    ))
+    return devices
+
 def linux_uvcList():
     devices = []
     info = [7, "0000:0000", "Generic camera"] # template
@@ -126,6 +145,7 @@ def zr364xxList():
 devices = []
 devices.extend(gspcaList())
 devices.extend(linux_uvcList())
+devices.extend(ov511List())
 devices.extend(pwcList())
 devices.extend(r5u870List())
 devices.extend(sn9c1xxList())
