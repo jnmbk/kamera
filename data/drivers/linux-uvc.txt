@@ -1,4 +1,4 @@
-# populated from http://cekirdek.pardus.org.tr/~onur/distfiles/linux-uvc-0.0_181.tar.gz uvc_driver.c
+# populated from http://cekirdek.pardus.org.tr/~onur/distfiles/linux-uvc-0.0_181.tar.gz uvc_driver.c:1686
 	/* ALi M5606 (Clevo M540SR) */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -75,11 +75,24 @@
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0 },
 	/* Apple Built-In iSight */
-	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE,
+	{ .match_flags          = USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
 	  .idVendor		= 0x05ac,
 	  .idProduct		= 0x8501,
+	  .bInterfaceClass      = USB_CLASS_VIDEO,
+	  .bInterfaceSubClass   = 1,
+	  .bInterfaceProtocol   = 0,
 	  .driver_info 		= UVC_QUIRK_PROBE_MINMAX
 	                        | UVC_QUIRK_BUILTIN_ISIGHT },
+	/* Genesys Logic USB 2.0 PC Camera */
+	{ .match_flags          = USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor             = 0x05e3,
+	  .idProduct            = 0x0505,
+	  .bInterfaceClass      = USB_CLASS_VIDEO,
+	  .bInterfaceSubClass   = 1,
+	  .bInterfaceProtocol   = 0,
+	  .driver_info          = UVC_QUIRK_STREAM_NO_FID },
 	/* Silicon Motion SM371 */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
@@ -130,6 +143,15 @@
 				| USB_DEVICE_ID_MATCH_INT_INFO,
 	  .idVendor		= 0x5986,
 	  .idProduct		= 0x0100,
+	  .bInterfaceClass	= USB_CLASS_VIDEO,
+	  .bInterfaceSubClass	= 1,
+	  .bInterfaceProtocol	= 0,
+	  .driver_info		= UVC_QUIRK_PROBE_MINMAX },
+	/* Packard Bell OEM Webcam */
+	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
+				| USB_DEVICE_ID_MATCH_INT_INFO,
+	  .idVendor		= 0x5986,
+	  .idProduct		= 0x0101,
 	  .bInterfaceClass	= USB_CLASS_VIDEO,
 	  .bInterfaceSubClass	= 1,
 	  .bInterfaceProtocol	= 0,
