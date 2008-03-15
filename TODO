@@ -6,5 +6,5 @@ Algorithm may be like this:
 * Show a webcam output window
 
 Drivers to be checked:
-* ov511
-* qc-usb
+* ov511-jpeg
+* sqcam
