@@ -8,3 +8,6 @@ Algorithm may be like this:
 Drivers to be checked:
 * ov511-jpeg
 * sqcam
+
+Others:
+* filldb must lower the usb ids before adding them
