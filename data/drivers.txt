@@ -7,3 +7,4 @@
 7|linux-uvc|0.0_195|2008-03-15|http://linux-uvc.berlios.de/
 8|ov511|2.32|2008-03-14|http://alpha.dyndns.org
 9|qc-usb|0.6.6|2008-03-15|http://qce-ga.sourceforge.net
+10|qc-usb-messenger|1.7|2008-03-15|http://home.mag.cx/messenger

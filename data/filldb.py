@@ -92,6 +92,21 @@ def qc_usbList():
                 )
     return devices
 
+def qc_usb_messengerList():
+    devices = []
+    for line in open("drivers/qc-usb-messenger.txt").readlines()[1:]:
+        devices.append(
+                (
+                    9, # driver_id
+                    "%s:%s" % ( # device_id
+                        line[line.find('0x') + 2:][:4],
+                        line[line.find('0x', line.find('0x') + 1) + 2:][:4]
+                        ),
+                    line[line.rfind("/*") + 3:line.rfind("*/") - 1] # description
+                    )
+                )
+    return devices
+
 def r5u870List():
     devices = []
     for line in open("drivers/r5u870.txt").readlines()[1:]:
@@ -166,6 +181,7 @@ devices.extend(linux_uvcList())
 devices.extend(ov511List())
 devices.extend(pwcList())
 devices.extend(qc_usbList())
+devices.extend(qc_usb_messengerList())
 devices.extend(r5u870List())
 devices.extend(sn9c1xxList())
 devices.extend(syntekdriverList())
