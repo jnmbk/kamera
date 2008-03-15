@@ -1,0 +1,8 @@
+1|pwc|10.0.12_20070616|2008-03-02|http://www.smcc.demon.nl/webcam/
+2|gspca|0.0_20071224|2008-03-02|http://mxhaard.free.fr/spca5xx.html
+3|zr364xx|0.64|2008-03-02|http://royale.zerezo.com/zr364xx/
+4|sn9c1xx|1.48|2008-03-13|http://www.linux-projects.org
+5|r5u870|0.10.0|2008-03-13|http://lsb.blogdns.net/ry5u870/
+6|syntekdriver|1.3.1|2008-03-13|http://syntekdriver.sourceforge.net/
+7|linux-uvc|0.0_195|2008-03-15|http://linux-uvc.berlios.de/
+8|ov511|2.32|2008-03-14|http://alpha.dyndns.org

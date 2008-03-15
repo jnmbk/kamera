@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-
 def gspcaList():
     devices = []
     for line in open("drivers/gspca.txt").readlines()[1:]:
@@ -142,6 +141,10 @@ def zr364xxList():
                 )
     return devices
 
+drivers = []
+for line in open("drivers.txt").readlines():
+    drivers.append(tuple(line[:-1].split('|')))
+
 devices = []
 devices.extend(gspcaList())
 devices.extend(linux_uvcList())
@@ -154,8 +157,13 @@ devices.extend(zr364xxList())
 
 def filldb():
     from pysqlite2 import dbapi2 as sqlite
+    import os
+    os.unlink("webcams.db")
     con = sqlite.connect("webcams.db")
     cur = con.cursor()
+    cur.execute("create table drivers(id, package_name, version, date, homepage)")
+    cur.execute("create table devices(driver_id, usb_id, description)")
+    cur.executemany("insert into drivers(id, package_name, version, date, homepage) values(?,?,?,?,?)", drivers)
     cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", devices)
     con.commit()
     con.close()
