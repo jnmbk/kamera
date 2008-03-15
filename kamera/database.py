@@ -37,7 +37,7 @@ class Database:
         results = []
         query.prepare(
                 "select package_name, version, description from drivers join devices "
-                "where usb_id=:device_id and drivers.driver_id=devices.driver_id"
+                "where usb_id=:device_id and drivers.ROWID=devices.driver_id"
                 )
         query.bindValue(":device_id", QVariant(device_id))
         query.exec_()

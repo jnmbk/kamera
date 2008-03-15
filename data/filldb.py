@@ -143,7 +143,7 @@ def zr364xxList():
 
 drivers = []
 for line in open("drivers.txt").readlines():
-    drivers.append(tuple(line[:-1].split('|')))
+    drivers.append(tuple(line[line.find('|')+1:-1].split('|')))
 
 devices = []
 devices.extend(gspcaList())
@@ -161,9 +161,9 @@ def filldb():
     os.unlink("webcams.db")
     con = sqlite.connect("webcams.db")
     cur = con.cursor()
-    cur.execute("create table drivers(id, package_name, version, date, homepage)")
+    cur.execute("create table drivers(package_name, version, date, homepage)")
     cur.execute("create table devices(driver_id, usb_id, description)")
-    cur.executemany("insert into drivers(id, package_name, version, date, homepage) values(?,?,?,?,?)", drivers)
+    cur.executemany("insert into drivers(package_name, version, date, homepage) values(?,?,?,?)", drivers)
     cur.executemany("insert into devices(driver_id, usb_id, description) values(?,?,?)", devices)
     con.commit()
     con.close()
