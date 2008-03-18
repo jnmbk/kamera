@@ -1,4 +1,4 @@
-# populated from http://cekirdek.pardus.org.tr/~onur/distfiles/linux-uvc-0.0_181.tar.gz uvc_driver.c:1686
+# populated from http://cekirdek.pardus.org.tr/~onur/distfiles/linux-uvc-0.0_195.tar.gz uvc_driver.c:1686
 	/* ALi M5606 (Clevo M540SR) */
 	{ .match_flags		= USB_DEVICE_ID_MATCH_DEVICE
 				| USB_DEVICE_ID_MATCH_INT_INFO,
