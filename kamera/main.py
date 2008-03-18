@@ -14,13 +14,26 @@
 
 import sys
 
+from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from wizardpages import *
+import kamera_rc
 
 def main():
     app = QApplication(sys.argv)
 
-    mainWindow = QMainWindow()
-    mainWindow.show()
+    app.setApplicationName("kamera")
+    app.setOrganizationName("kamera")
+
+    locale = QLocale.system().name()
+    translator = QTranslator()
+    translator.load(":/kamera_%s.qm" % locale)
+    app.installTranslator(translator)
+
+    wizard = QWizard()
+    wizard.addPage(IntroPage())
+    wizard.setWindowTitle("Kamera")
+    wizard.show()
 
     return app.exec_()
 
