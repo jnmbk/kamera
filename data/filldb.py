@@ -16,15 +16,15 @@ def gspcaList():
     devices = []
     for line in open("drivers/gspca.txt").readlines()[1:]:
         devices.append(
-                (
+                [
                     2, # driver_id
                     "%s:%s" % ( # device_id
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
                     line[line.rfind("/*") + 3:line.rfind("*/") - 1] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 def ov511List():
@@ -33,7 +33,7 @@ def ov511List():
         if "VEND" in line:
             vendor = (line[line.rfind("0x") + 2:][:4], line[line.find('_') + 1:line.rfind('\t')])
         if "PROD" in line:
-            devices.append((
+            devices.append([
                     8, # driver_id
                     "%s:%s" % ( # device_id
                         vendor[0],
@@ -43,7 +43,7 @@ def ov511List():
                         vendor[1],
                         line[line.find('_') + 1:line.rfind('\t')]
                         )
-                    ))
+                    ])
     return devices
 
 def linux_uvcList():
@@ -57,7 +57,7 @@ def linux_uvcList():
         elif "Product" in line:
             info[1] += ":%s" % line[line.rfind("0x") + 2:][:4]
         elif "driver_info" in line:
-            devices.append(tuple(info))
+            devices.append(info)
     return devices
 
 def pwcList():
@@ -66,72 +66,72 @@ def pwcList():
         if not '*' in line:
             line += " /* Generic Philips Webcam */"
         devices.append(
-                (
+                [
                     1, # driver_id
                     "%s:%s" % ( # device_id
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
                     line[line.rfind("/*") + 3:line.rfind("*/") - 1] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 def qc_usbList():
     devices = []
     for line in open("drivers/qc-usb.txt").readlines()[1:]:
         devices.append(
-                (
+                [
                     9, # driver_id
                     "%s:%s" % ( # device_id
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
                     line[line.rfind("/*") + 3:line.rfind("*/") - 1] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 def qc_usb_messengerList():
     devices = []
     for line in open("drivers/qc-usb-messenger.txt").readlines()[1:]:
         devices.append(
-                (
+                [
                     9, # driver_id
                     "%s:%s" % ( # device_id
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
                     line[line.rfind("/*") + 3:line.rfind("*/") - 1] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 def r5u870List():
     devices = []
     for line in open("drivers/r5u870.txt").readlines()[1:]:
         devices.append(
-                (
+                [
                     5, # driver_id
                     line[:9], # device_id
                     line[10:-1] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 def sn9c1xxList():
     devices = []
     for line in open("drivers/sn9c1xx.txt").readlines()[1:]:
         devices.append(
-                (
+                [
                     4, # driver_id
                     "%s:%s" % ( # device_id
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
                     line[line.rfind('_') + 1:line.rfind(')')] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 def syntekdriverList():
@@ -143,15 +143,15 @@ def syntekdriverList():
             vendors.append(line[line.find("0x") + 2:][:4])
         elif "PRODUCT" in line:
             devices.append(
-                    (
+                    [
                         6, # driver_id
                         "%s:%s" % ( # device_id
                             vendors[counter],
                             line[line.find("0x") + 2:][:4],
                             ),
                         line[line.rfind("camera") + 7:line.rfind('*') - 1] # description
-                        )
-                    )
+                    ]
+                )
         else:
             counter += 1
     return devices
@@ -160,15 +160,15 @@ def zr364xxList():
     devices = []
     for line in open("drivers/zr364xx.txt").readlines()[1:]:
         devices.append(
-                (
+                [
                     3, # driver_id
                     "%s:%s" % ( # device_id
                         line[line.find('0x') + 2:][:4],
                         line[line.find('0x', line.find('0x') + 1) + 2:][:4]
                         ),
                     line[line.rfind(" \"") + 2:line.rfind('"')] # description
-                    )
-                )
+                ]
+            )
     return devices
 
 drivers = []
@@ -186,6 +186,9 @@ devices.extend(r5u870List())
 devices.extend(sn9c1xxList())
 devices.extend(syntekdriverList())
 devices.extend(zr364xxList())
+
+for i in range(len(devices)):
+    devices[i][1] = devices[i][1].lower()
 
 def filldb():
     from pysqlite2 import dbapi2 as sqlite

@@ -9,9 +9,6 @@ Drivers to be checked:
 * ov511-jpeg
 * sqcam
 
-Others:
-* filldb must lower the usb ids before adding them
-
 Wizard pages:
 1- This wizard will help you installing and using your USB webcam under Pardus.
    Please connect your webcam to a USB port on your computer and click next.
