@@ -8,3 +8,4 @@
 8|ov511|2.32|2008-03-14|http://alpha.dyndns.org
 9|qc-usb|0.6.6|2008-03-15|http://qce-ga.sourceforge.net
 10|qc-usb-messenger|1.7|2008-03-15|http://home.mag.cx/messenger
+11|ov51x-jpeg|1.5.6|2008-03-22|http://www.rastageeks.org/ov51x-jpeg/

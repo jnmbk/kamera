@@ -46,6 +46,25 @@ def ov511List():
                     ])
     return devices
 
+def ov51x_jpegList():
+    devices = []
+    for line in open("drivers/ov51x-jpeg.txt").readlines()[1:]:
+        if "VEND" in line:
+            vendor = (line[line.rfind("0x") + 2:][:4], line[line.find('_') + 1:line.rfind('\t') - 1])
+        if "PROD" in line:
+            devices.append([
+                    11, # driver_id
+                    "%s:%s" % ( # device_id
+                        vendor[0],
+                        line[line.rfind("0x") + 2:][:4]
+                        ),
+                    "%s %s" % ( # description
+                        vendor[1],
+                        line[line.find('_') + 1:line.find('\t')]
+                        )
+                    ])
+    return devices
+
 def linux_uvcList():
     devices = []
     info = [7, "0000:0000", "Generic camera"] # template
@@ -179,6 +198,7 @@ devices = []
 devices.extend(gspcaList())
 devices.extend(linux_uvcList())
 devices.extend(ov511List())
+devices.extend(ov51x_jpegList())
 devices.extend(pwcList())
 devices.extend(qc_usbList())
 devices.extend(qc_usb_messengerList())
