@@ -32,6 +32,7 @@ def main():
 
     wizard = QWizard()
     wizard.addPage(IntroPage())
+    wizard.addPage(NoWebcamFoundPage())
     wizard.setWindowTitle("Kamera")
     wizard.show()
 

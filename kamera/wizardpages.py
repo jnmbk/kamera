@@ -13,9 +13,14 @@
 #
 
 from PyQt4.QtGui import *
-import ui_intro
+import ui_intro, ui_nowebcamfound
 
 class IntroPage (QWizardPage, ui_intro.Ui_Form):
     def initializePage(self):
         self.setTitle(QApplication.translate("IntroPage", "About Wizard"))
+        self.setupUi(self)
+
+class NoWebcamFoundPage (QWizardPage, ui_nowebcamfound.Ui_Form):
+    def initializePage(self):
+        self.setTitle(QApplication.translate("NoWebcamFoundPage", "No Webcams Found"))
         self.setupUi(self)
