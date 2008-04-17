@@ -33,7 +33,7 @@ def getList():
         device.bus = line[4:7]
         device.device = line[15:18]
         device.id = line[23:32]
-        device.description = line[33:]
+        device.description = line[33:-1]
         deviceList.append(device)
     lsusb.close()
     return deviceList
