@@ -16,7 +16,7 @@ import sys
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from wizardpages import *
+from wizard import Wizard
 import kamera_rc
 
 def main():
@@ -30,10 +30,7 @@ def main():
     translator.load(":/kamera_%s.qm" % locale)
     app.installTranslator(translator)
 
-    wizard = QWizard()
-    wizard.addPage(IntroPage())
-    wizard.addPage(NoWebcamFoundPage())
-    wizard.setWindowTitle("Kamera")
+    wizard = Wizard()
     wizard.show()
 
     return app.exec_()
