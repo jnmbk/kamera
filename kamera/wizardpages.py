@@ -41,10 +41,17 @@ class WebcamListPage (QWizardPage, ui_webcamlist.Ui_WebcamList):
     def initializePage(self):
         self.setTitle(QApplication.translate("WebcamListPage", "Webcams Found"))
         self.setupUi(self)
-        self.webcams = []
-        for device in deviceManager.devices:
-            if device.drivers:
-                webcam = QCheckBox(self)
-                webcam.setText(device.drivers[0]["description"])
-                self.gridlayout.addWidget(webcam)
-                self.webcams.append(webcam)
+
+        #populate webcam list for selection
+        webcams = deviceManager.webcamList()
+        for i in range(len(webcams)):
+            webcamCheckBox = QCheckBox(self)
+            text = webcams[i].drivers[0]["description"]
+            if deviceManager.isDriverInstalled(webcams[i].drivers[0]["driver"]):
+                text += " " + QApplication.translate("WebcamListPage", "(%1 driver is already installed)").arg(webcams[i].drivers[0]["driver"])
+                webcamCheckBox.setEnabled(False)
+            else:
+                text += " " + QApplication.translate("WebcamListPage", "(%1 driver is not installed)").arg(webcams[i].drivers[0]["driver"])
+            webcamCheckBox.setText(text)
+            self.gridlayout.addWidget(webcamCheckBox)
+            self.registerField("webcam_%d" % i, webcamCheckBox)
