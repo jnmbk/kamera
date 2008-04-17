@@ -26,7 +26,7 @@ except:
     print "\033[31mWarning: You have to install PyQt4 on your system\033[0m"
 
 def compileui(path, uiFile):
-    compiled = os.system("pyuic4 %s%s.ui -o %s/%s_ui.py" % (path, uiFile, PRJ, uiFile))
+    compiled = os.system("pyuic4 %s%s.ui -o %s/ui_%s.py" % (path, uiFile, PRJ, uiFile))
     if compiled == 0:
         print "Compiled %s%s.ui -> %s/ui_%s.py" % (path, uiFile, PRJ, uiFile)
     else:
