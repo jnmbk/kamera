@@ -19,9 +19,6 @@ class DeviceManager:
     driversFound = False
     devices = []
 
-    def __init__(self):
-        self.refreshDeviceList()
-
     def refreshDeviceList(self):
         #collect devices from usb
         self.devices = usblist.getList()

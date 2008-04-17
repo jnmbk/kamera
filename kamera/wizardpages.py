@@ -18,17 +18,16 @@ import ui_intro, ui_nowebcamfound, ui_webcamlist
 
 Page_Intro, Page_NoWebcamFound, Page_WebcamList = range(3)
 
-class IntroPage (QWizardPage, ui_intro.Ui_Form):
-    deviceManager = None
+deviceManager = DeviceManager()
 
+class IntroPage (QWizardPage, ui_intro.Ui_Form):
     def initializePage(self):
         self.setTitle(QApplication.translate("IntroPage", "About Wizard"))
         self.setupUi(self)
 
     def nextId(self):
-        if not self.deviceManager:
-            self.deviceManager = DeviceManager()
-        if self.deviceManager.driversFound:
+        deviceManager.refreshDeviceList()
+        if deviceManager.driversFound:
             return Page_WebcamList
         else:
             return Page_NoWebcamFound
@@ -38,7 +37,14 @@ class NoWebcamFoundPage (QWizardPage, ui_nowebcamfound.Ui_Form):
         self.setTitle(QApplication.translate("NoWebcamFoundPage", "No Webcams Found"))
         self.setupUi(self)
 
-class WebcamListPage (QWizardPage, ui_webcamlist.Ui_Form):
+class WebcamListPage (QWizardPage, ui_webcamlist.Ui_WebcamList):
     def initializePage(self):
         self.setTitle(QApplication.translate("WebcamListPage", "Webcams Found"))
         self.setupUi(self)
+        self.webcams = []
+        for device in deviceManager.devices:
+            if device.drivers:
+                webcam = QCheckBox(self)
+                webcam.setText(device.drivers[0]["description"])
+                self.gridlayout.addWidget(webcam)
+                self.webcams.append(webcam)
