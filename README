@@ -1,3 +1,9 @@
 Easy webcam installer for Pardus
 
 This will be a webcam driver installer for Pardus, inspired by EasyCam.
+
+If you want to try out latest development version, use these commands:
+svn co http://kamera.googlecode.com/svn/trunk/ kamera
+cd kamera
+python setup.py build
+python kamera/main.py
