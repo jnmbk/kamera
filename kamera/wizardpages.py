@@ -13,36 +13,32 @@
 #
 
 from PyQt4.QtGui import *
-import ui_intro, ui_nowebcamfound
+from devicemanager import DeviceManager
+import ui_intro, ui_nowebcamfound, ui_webcamlist
 
-Page_Intro, Page_NoWebcamFound = range(2)
+Page_Intro, Page_NoWebcamFound, Page_WebcamList = range(3)
 
 class IntroPage (QWizardPage, ui_intro.Ui_Form):
+    deviceManager = None
+
     def initializePage(self):
         self.setTitle(QApplication.translate("IntroPage", "About Wizard"))
         self.setupUi(self)
 
     def nextId(self):
-        #collect devices from usb
-        import usblist
-        devices = usblist.getList()
-
-        #check if they exist in db
-        import database
-        db = database.Database()
-        driversFound = False
-        for device in devices:
-            device.drivers = db.get_driver_for_device_id(device.id)
-            if device.drivers:
-                driversFound = True
-                for driver in device.drivers:
-                    print "Found:", driver["description"] ,"for", device.description, "in", driver["driver"]
-        if driversFound:
-            return Page_Intro
+        if not self.deviceManager:
+            self.deviceManager = DeviceManager()
+        if self.deviceManager.driversFound:
+            return Page_WebcamList
         else:
             return Page_NoWebcamFound
 
 class NoWebcamFoundPage (QWizardPage, ui_nowebcamfound.Ui_Form):
     def initializePage(self):
         self.setTitle(QApplication.translate("NoWebcamFoundPage", "No Webcams Found"))
+        self.setupUi(self)
+
+class WebcamListPage (QWizardPage, ui_webcamlist.Ui_Form):
+    def initializePage(self):
+        self.setTitle(QApplication.translate("WebcamListPage", "Webcams Found"))
         self.setupUi(self)

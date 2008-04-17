@@ -22,3 +22,4 @@ class Wizard(QWizard):
         self.setWindowTitle("Kamera")
         self.setPage(Page_Intro, IntroPage())
         self.setPage(Page_NoWebcamFound, NoWebcamFoundPage())
+        self.setPage(Page_WebcamList, WebcamListPage())
