@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>MainWindow</string>
+   <string>Kamera</string>
   </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" name="gridLayout" >
@@ -67,7 +67,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_save" >
           <property name="text" >
-           <string>Save</string>
+           <string>&amp;Save</string>
           </property>
          </widget>
         </item>
@@ -113,7 +113,8 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
+  <widget class="QStatusBar" name="statusbar" />
+  <widget class="QMenuBar" name="menuBar" >
    <property name="geometry" >
     <rect>
      <x>0</x>
@@ -122,8 +123,25 @@
      <height>29</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_Help" >
+    <property name="title" >
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About_Kamera" />
+    <addaction name="action_About_Qt" />
+   </widget>
+   <addaction name="menu_Help" />
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
+  <action name="action_About_Qt" >
+   <property name="text" >
+    <string>About &amp;Qt...</string>
+   </property>
+  </action>
+  <action name="action_About_Kamera" >
+   <property name="text" >
+    <string>About &amp;Kamera...</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

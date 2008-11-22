@@ -19,6 +19,8 @@ from PyQt4 import QtGui
 
 from opencvwidget import OpenCVWidget, CamThread
 from ui_mainwindow import Ui_MainWindow
+from defaultsettings import IMAGE_FORMAT
+import __init__
 
 class MyOpenCVWidget(OpenCVWidget):
     def __init__(self, label):
@@ -35,13 +37,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.createImageList()
         self.opencvwidget = MyOpenCVWidget(self.label_webcam)
 
-    @QtCore.pyqtSignature("bool")
-    def on_pushButton_save_clicked(self):
-        fileextension = self.settings.value("image/format", QtCore.QVariant("png")).toString()
-        filename = "kamera_%s.%s" % (QtCore.QDateTime.currentDateTime().toString("yyyyMMdd-hhmmss"), fileextension)
-        self.opencvwidget.snapShot().save(filename)
-        self.addImage(self.opencvwidget.pixmap)
-
     def createImageList(self):
         self.imageFiles = [file for file in os.listdir(".") if file.startswith("kamera_")]
         imageLayout = QtGui.QHBoxLayout()
@@ -57,3 +52,20 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         label.setMaximumSize(label.pixmap().size())
         label.setStyleSheet("border-right:2px solid gray;border-bottom:2px solid black")
         self.imageListWidget.layout().addWidget(label)
+
+    @QtCore.pyqtSignature("bool")
+    def on_pushButton_save_clicked(self):
+        fileextension = self.settings.value("image/format", IMAGE_FORMAT).toString()
+        filename = "kamera_%s.%s" % (QtCore.QDateTime.currentDateTime().toString("yyyyMMdd-hhmmss"), fileextension)
+        self.opencvwidget.snapShot().save(filename)
+        self.addImage(self.opencvwidget.pixmap)
+
+    @QtCore.pyqtSignature("bool")
+    def on_action_About_Qt_triggered(self):
+        QtGui.QMessageBox.aboutQt(self)
+
+    @QtCore.pyqtSignature("bool")
+    def on_action_About_Kamera_triggered(self):
+        title = QtGui.QApplication.translate("MainWindow", "About Kamera")
+        text = QtGui.QApplication.translate("MainWindow", "Kamera %1 - webcam photographer\nThis software is released under the terms of GPL v3.\nhttp://kamera.googlecode.com\n\nDeveloper:\nUgur Cetin <ugur.jnmbk at gmail.com>").arg(__init__.__version__)
+        QtGui.QMessageBox.about(self, title, text)

@@ -14,4 +14,4 @@
 
 from PyQt4.QtCore import QVariant
 
-DATABASE_FILE_LOCATION = QVariant("data/webcams.db")
+IMAGE_FORMAT = QVariant("jpg")
