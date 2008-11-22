@@ -9,3 +9,5 @@ svn co http://kamera.googlecode.com/svn/trunk kamera
 cd kamera
 python setup.py build
 python kamera/main.py
+
+Kamera icon is taken from Tulliana 2.0 icon set

@@ -12,6 +12,10 @@
   <property name="windowTitle" >
    <string>Kamera</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="../data/kamera.qrc" >
+    <normaloff>:/kamera.png</normaloff>:/kamera.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" name="gridLayout" >
     <item row="0" column="0" >
@@ -143,6 +147,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../data/kamera.qrc" />
+ </resources>
  <connections/>
 </ui>
