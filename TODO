@@ -1,40 +1,4 @@
-Algorithm may be like this:
-* Check for USB webcams connected
-* List possible webcams and let user select
-* Send lsusb output to me when no camera is found and maybe take email address to notify user
-* Install required driver package
-- Show a webcam output window
-
-Drivers to be checked:
-* sqcam
-
-Wizard pages:
-1- This wizard will help you installing and using your USB webcam under Pardus.
-   Please connect your webcam to a USB port on your computer and click next.
-
-2- No webcams found. Please make sure that your webcam is connected and click retry.
-   If it can't be detected again, please consider sending a report by clicking send report.
-
-3- A webcam is connected to your xth USB bus as xth device.
-   Device is described as "..." in driver.
-   Click here if description is wrong and you want it to be corrected in our database.
-   Required driver is installed for this webcam. - A driver will be installed for this webcam.
-   As you can see, all drivers are installed and your webcams seem to be ready for use.
-   Click next to install additional webcam releated packages.
-
-4- Please wait while drivers are being installed.
-
-5- No Internet connection is found for downloading webcam drivers.
-   Click retry to retry downloading or manually download these files and press Install from package... button.
-
-6- Your webcam is ready. - Your webcams are ready.
-   Select additional packages if you want and click install. - You have many apps like CamStream, Amsn... installed, which should work fine. Click finish and don't forget to run KNazar for protection. Please send your feedbacks to ugur.jnmbk@gmail.com
-
-   You selected to install ..., ... and .... These packages will take a xxMB download.
-
-7- Downloading packages
-   x%
-   complete
-   downloading:
-   speed:
-   remaining time:
+Application Icon
+Settings Window
+ Webcam Selection
+ Display Settings(colors, mirror)

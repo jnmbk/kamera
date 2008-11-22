@@ -1,1 +1,7 @@
+Dependencies:
+python-qt4(PyQt4)
+python-imaging(PIL)
+python-opencv
+
+Install command:
 sudo python setup.py install
