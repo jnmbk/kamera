@@ -61,9 +61,10 @@ class myBuild(build):
     def run(self):
         build.run(self)
         try:
-            uiFiles = [("ui/", file[:-3]) for file in os.listdir("ui")[1:]]
+            uiFiles = [("ui/", file[:-3]) for file in os.listdir("ui")]
             for ui in uiFiles:
-                compileui(ui[0], ui[1])
+                if not ui[1] in (".", ".."):
+                    compileui(ui[0], ui[1])
         except TypeError:
             print "No .ui files to compile"
         if os.system("lrelease-qt4 data/%s_tr_TR.ts -qm data/%s_tr_TR.qm" % (PRJ, PRJ)) == 0:
