@@ -12,26 +12,28 @@
 # Please read the COPYING file.
 #
 
+import signal
 import sys
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from wizard import Wizard
+from PyQt4 import QtCore
+from PyQt4 import QtGui
+from mainwindow import MainWindow
 import kamera_rc
 
 def main():
-    app = QApplication(sys.argv)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    app = QtGui.QApplication(sys.argv)
 
     app.setApplicationName("kamera")
     app.setOrganizationName("kamera")
 
-    locale = QLocale.system().name()
-    translator = QTranslator()
+    locale = QtCore.QLocale.system().name()
+    translator = QtCore.QTranslator()
     translator.load(":/kamera_%s.qm" % locale)
     app.installTranslator(translator)
 
-    wizard = Wizard()
-    wizard.show()
+    mainWindow = MainWindow()
+    mainWindow.show()
 
     return app.exec_()
 

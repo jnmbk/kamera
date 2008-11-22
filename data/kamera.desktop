@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=Qt;Application;Graphics;
+Encoding=UTF-8
+Exec=kamera
+GenericName=Webcam Photographer
+GenericName[tr]=Web Kamerasıyla Fotoğraf Çekme
+Icon=kamera
+Name=Kamera
+StartupNotify=true
+Terminal=false
+Type=Application
