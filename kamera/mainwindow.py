@@ -53,7 +53,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
     def addImage(self, pixmap):
         label = QtGui.QLabel(self.imageListWidget)
-        label.setPixmap(pixmap.scaledToHeight(120))
+        label.setPixmap(pixmap.scaledToHeight(100))
         label.setMaximumSize(label.pixmap().size())
         label.setStyleSheet("border-right:2px solid gray;border-bottom:2px solid black")
         self.imageListWidget.layout().addWidget(label)
