@@ -1,5 +1,0 @@
-# populated from http://home.mag.cx/messenger/source/qc-usb-messenger-1.7.tar.gz qc-driver.c
-	{ USB_DEVICE(0x046D, 0x08F0) },		/* QuickCam Messenger */
-	{ USB_DEVICE(0x046D, 0x08F5) },		/* QuickCam Communicate */
-	{ USB_DEVICE(0x046D, 0x08F6) },		/* QuickCam Messenger (new) */
-	{ USB_DEVICE(0x046D, 0x08DA) },		/* QuickCam Messenger (new) */

@@ -1,4 +1,0 @@
-# populated from http://mesh.dl.sourceforge.net/qce-ga/qc-usb-0.6.6.tar.gz qc-driver.c
-	{ USB_DEVICE(0x046D, 0x0840) },		/* QuickCam Express */
-	{ USB_DEVICE(0x046D, 0x0850) },		/* LEGO cam / QuickCam Web */
-	{ USB_DEVICE(0x046D, 0x0870) },		/* Dexxa WebCam USB */

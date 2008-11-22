@@ -1,9 +1,0 @@
-# populated from http://alpha.dyndns.org/ov511/download/2.xx/distros/ov511-2.32.tar.bz2 ov511.h
-#define VEND_OMNIVISION	0x05A9
-#define PROD_OV511	0x0511
-#define PROD_OV511PLUS	0xA511
-#define PROD_OV518	0x0518
-#define PROD_OV518PLUS	0xA518
-
-#define VEND_MATTEL	0x0813
-#define PROD_ME2CAM	0x0002
