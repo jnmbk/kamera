@@ -14,12 +14,16 @@
 
 import os
 
+import opencv
+import Image
+import ImageQt
+
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 
 from opencvwidget import OpenCVWidget, CamThread
 from ui_mainwindow import Ui_MainWindow
-from defaultsettings import IMAGE_FORMAT
+from defaultsettings import IMAGE_FORMAT, VIDEO_FLIP_LEFT_RIGHT, VIDEO_FLIP_TOP_BOTTOM
 import __init__
 
 class MyOpenCVWidget(OpenCVWidget):
@@ -28,6 +32,21 @@ class MyOpenCVWidget(OpenCVWidget):
         self.camThread = CamThread()
         self.connect(self.camThread, QtCore.SIGNAL("image"), self.updateImage)
         self.camThread.start()
+        self.settings = QtCore.QSettings()
+
+    def updateImage(self, cvimage):
+        try:
+            image = opencv.adaptors.Ipl2PIL(cvimage)
+            if self.settings.value("video/flip_left_right", VIDEO_FLIP_LEFT_RIGHT):
+                image = image.transpose(Image.FLIP_LEFT_RIGHT)
+            if self.settings.value("video/flip_top_bottom", VIDEO_FLIP_TOP_BOTTOM):
+                image = image.transpose(Image.FLIP_TOP_BOTTOM)
+            self.image = ImageQt.ImageQt(image)
+            self.pixmap = QtGui.QPixmap.fromImage(self.image)
+            self.imageLabel.setPixmap(self.pixmap)
+        except TypeError:
+            #webcam not recognized
+            self.emit(QtCore.SIGNAL("error"))
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -36,6 +55,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.settings = QtCore.QSettings()
         self.createImageList()
         self.opencvwidget = MyOpenCVWidget(self.label_webcam)
+        #TODO: connect opencvwidget's error signal to a slot
 
     def createImageList(self):
         self.imageFiles = [file for file in os.listdir(".") if file.startswith("kamera_")]
