@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog" >
+ <class>ConfigWindow</class>
+ <widget class="QDialog" name="ConfigWindow" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -58,10 +58,14 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout" >
              <item>
-              <widget class="QLineEdit" name="lineEdit" />
+              <widget class="QLineEdit" name="lineEdit_image_directory" >
+               <property name="readOnly" >
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton" >
+              <widget class="QPushButton" name="pushButton_image_directory" >
                <property name="text" >
                 <string>...</string>
                </property>
@@ -70,7 +74,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox" >
+            <widget class="QComboBox" name="comboBox_image_format" >
              <property name="currentIndex" >
               <number>1</number>
              </property>
@@ -150,7 +154,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_2" >
+            <widget class="QComboBox" name="comboBox_video_webcam" >
              <item>
               <property name="text" >
                <string>Default</string>
@@ -167,14 +171,14 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3" >
             <item>
-             <widget class="QCheckBox" name="checkBox" >
+             <widget class="QCheckBox" name="checkBox_video_flip_left_right" >
               <property name="text" >
                <string>Flip Horizontally</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_2" >
+             <widget class="QCheckBox" name="checkBox_video_flip_top_bottom" >
               <property name="text" >
                <string>Flip Vertically</string>
               </property>
@@ -234,7 +238,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ConfigWindow</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -250,7 +254,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ConfigWindow</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >

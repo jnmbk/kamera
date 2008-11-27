@@ -12,8 +12,10 @@
 # Please read the COPYING file.
 #
 
+from PyQt4.QtCore import QDir
 from PyQt4.QtCore import QVariant
 
 IMAGE_FORMAT = QVariant("jpg")
 VIDEO_FLIP_LEFT_RIGHT = QVariant(True)
 VIDEO_FLIP_TOP_BOTTOM = QVariant(False)
+IMAGE_DIRECTORY = QVariant(QDir.homePath())

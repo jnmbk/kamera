@@ -23,7 +23,8 @@ from PyQt4 import QtGui
 
 from opencvwidget import OpenCVWidget, CamThread
 from ui_mainwindow import Ui_MainWindow
-from defaultsettings import IMAGE_FORMAT, VIDEO_FLIP_LEFT_RIGHT, VIDEO_FLIP_TOP_BOTTOM
+from configwindow import ConfigWindow
+from defaultsettings import IMAGE_DIRECTORY, IMAGE_FORMAT, VIDEO_FLIP_LEFT_RIGHT, VIDEO_FLIP_TOP_BOTTOM
 import __init__
 
 class MyOpenCVWidget(OpenCVWidget):
@@ -37,9 +38,9 @@ class MyOpenCVWidget(OpenCVWidget):
     def updateImage(self, cvimage):
         try:
             image = opencv.adaptors.Ipl2PIL(cvimage)
-            if self.settings.value("video/flip_left_right", VIDEO_FLIP_LEFT_RIGHT):
+            if self.settings.value("video/flip_left_right", VIDEO_FLIP_LEFT_RIGHT).toBool():
                 image = image.transpose(Image.FLIP_LEFT_RIGHT)
-            if self.settings.value("video/flip_top_bottom", VIDEO_FLIP_TOP_BOTTOM):
+            if self.settings.value("video/flip_top_bottom", VIDEO_FLIP_TOP_BOTTOM).toBool():
                 image = image.transpose(Image.FLIP_TOP_BOTTOM)
             self.image = ImageQt.ImageQt(image)
             self.pixmap = QtGui.QPixmap.fromImage(self.image)
@@ -55,6 +56,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.settings = QtCore.QSettings()
         self.createImageList()
         self.opencvwidget = MyOpenCVWidget(self.label_webcam)
+        self.configWindow = ConfigWindow(self)
+        QtCore.QDir.setCurrent(self.settings.value("image/directory", IMAGE_DIRECTORY).toString())
         #TODO: connect opencvwidget's error signal to a slot
 
     def createImageList(self):
@@ -81,11 +84,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.addImage(self.opencvwidget.pixmap)
 
     @QtCore.pyqtSignature("bool")
-    def on_action_About_Qt_triggered(self):
-        QtGui.QMessageBox.aboutQt(self)
-
-    @QtCore.pyqtSignature("bool")
-    def on_action_About_Kamera_triggered(self):
+    def on_pushButton_about_clicked(self):
         title = QtGui.QApplication.translate("MainWindow", "About Kamera")
         text = QtGui.QApplication.translate("MainWindow", "Kamera %1 - webcam photographer\nThis software is released under the terms of GPL v3.\nhttp://kamera.googlecode.com\n\nDeveloper:\nUgur Cetin <ugur.jnmbk at gmail.com>").arg(__init__.__version__)
         QtGui.QMessageBox.about(self, title, text)
+
+    @QtCore.pyqtSignature("bool")
+    def on_pushButton_configure_clicked(self):
+        self.configWindow.show()
