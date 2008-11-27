@@ -54,10 +54,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
         self.settings = QtCore.QSettings()
+        QtCore.QDir.setCurrent(self.settings.value("image/directory", IMAGE_DIRECTORY).toString())
         self.createImageList()
         self.opencvwidget = MyOpenCVWidget(self.label_webcam)
         self.configWindow = ConfigWindow(self)
-        QtCore.QDir.setCurrent(self.settings.value("image/directory", IMAGE_DIRECTORY).toString())
         #TODO: connect opencvwidget's error signal to a slot
 
     def createImageList(self):
