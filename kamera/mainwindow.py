@@ -62,6 +62,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
     def createImageList(self):
         self.imageFiles = [file for file in os.listdir(".") if file.startswith("kamera_")]
+        self.imageFiles.sort()
         imageLayout = QtGui.QHBoxLayout()
         self.imageListWidget = QtGui.QWidget()
         self.imageListWidget.setLayout(imageLayout)
@@ -74,7 +75,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         label.setPixmap(pixmap.scaledToHeight(100))
         label.setMaximumSize(label.pixmap().size())
         label.setStyleSheet("border-right:2px solid gray;border-bottom:2px solid black")
-        self.imageListWidget.layout().addWidget(label)
+        self.imageListWidget.layout().insertWidget(0, label)
 
     @QtCore.pyqtSignature("bool")
     def on_pushButton_save_clicked(self):
