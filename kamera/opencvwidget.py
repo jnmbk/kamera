@@ -23,12 +23,12 @@ import signal, sys
 class CamThread(QtCore.QThread):
     def run(self):
         camera = highgui.cvCreateCameraCapture(0)
-        timeout = highgui.cvGetCaptureProperty(camera, highgui.CV_CAP_PROP_FPS)
+        fps = highgui.cvGetCaptureProperty(camera, highgui.CV_CAP_PROP_FPS)
         #30 fps if cam gives no value
-        if not timeout > 0:
+        if not fps > 0:
             timeout = 33
         else:
-            timeout = 1000 / timeout
+            timeout = 1000 / fps
         while True:
             self.msleep(timeout)
             self.cvimage = highgui.cvQueryFrame(camera)
