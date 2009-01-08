@@ -85,7 +85,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_about" >
           <property name="text" >
-           <string>&amp;About...</string>
+           <string>&amp;Aboout...</string>
           </property>
          </widget>
         </item>
