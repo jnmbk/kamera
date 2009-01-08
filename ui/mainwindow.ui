@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>673</width>
-    <height>705</height>
+    <height>734</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -76,20 +76,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_configure" >
-          <property name="text" >
-           <string>&amp;Configure...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_about" >
-          <property name="text" >
-           <string>&amp;About...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer" >
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
@@ -132,6 +118,34 @@
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar" />
+  <widget class="QMenuBar" name="menuBar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>673</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_Help" >
+    <property name="title" >
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About_Kamera" />
+    <addaction name="action_About_Qt" />
+   </widget>
+   <addaction name="menu_Help" />
+  </widget>
+  <action name="action_About_Qt" >
+   <property name="text" >
+    <string>About &amp;Qt...</string>
+   </property>
+  </action>
+  <action name="action_About_Kamera" >
+   <property name="text" >
+    <string>About &amp;Kamera...</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../data/kamera.qrc" />
