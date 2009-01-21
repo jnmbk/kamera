@@ -29,6 +29,7 @@ import __init__
 
 class MyOpenCVWidget(OpenCVWidget):
     def __init__(self, label):
+        QtGui.QWidget.__init__(self)
         self.imageLabel = label
         self.camThread = CamThread()
         self.connect(self.camThread, QtCore.SIGNAL("image"), self.updateImage)
