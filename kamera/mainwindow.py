@@ -28,9 +28,10 @@ from defaultsettings import IMAGE_DIRECTORY, IMAGE_FORMAT, VIDEO_FLIP_LEFT_RIGHT
 import __init__
 
 class MyOpenCVWidget(OpenCVWidget):
-    def __init__(self, label):
+    def __init__(self, label, button):
         QtGui.QWidget.__init__(self)
         self.imageLabel = label
+        self.pushButton_save = button
         self.camThread = CamThread()
         self.connect(self.camThread, QtCore.SIGNAL("image"), self.updateImage)
         self.camThread.start()
@@ -49,6 +50,7 @@ class MyOpenCVWidget(OpenCVWidget):
         except TypeError:
             self.emit(QtCore.SIGNAL("error"), QtGui.QApplication.translate("MainWindow", "No webcam found"))
             self.camThread.terminate()
+            self.pushButton_save.setEnabled(False)
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -57,7 +59,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.settings = QtCore.QSettings()
         QtCore.QDir.setCurrent(self.settings.value("image/directory", IMAGE_DIRECTORY).toString())
         self.createImageList()
-        self.opencvwidget = MyOpenCVWidget(self.label_webcam)
+        self.opencvwidget = MyOpenCVWidget(self.label_webcam, self.pushButton_save)
         self.configWindow = ConfigWindow(self)
         self.connect(self.opencvwidget, QtCore.SIGNAL("error"), self.label_webcam.setText)
 
