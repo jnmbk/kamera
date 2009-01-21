@@ -47,8 +47,8 @@ class MyOpenCVWidget(OpenCVWidget):
             self.pixmap = QtGui.QPixmap.fromImage(self.image)
             self.imageLabel.setPixmap(self.pixmap)
         except TypeError:
-            #webcam not recognized
-            self.emit(QtCore.SIGNAL("error"))
+            self.emit(QtCore.SIGNAL("error"), QtGui.QApplication.translate("MainWindow", "No webcam found"))
+            self.camThread.terminate()
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -59,7 +59,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.createImageList()
         self.opencvwidget = MyOpenCVWidget(self.label_webcam)
         self.configWindow = ConfigWindow(self)
-        #TODO: connect opencvwidget's error signal to a slot
+        self.connect(self.opencvwidget, QtCore.SIGNAL("error"), self.label_webcam.setText)
 
     def createImageList(self):
         self.imageFiles = [file for file in os.listdir(".") if file.startswith("kamera_")]
