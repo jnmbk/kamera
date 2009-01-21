@@ -132,12 +132,12 @@
         <translation type="obsolete">&amp;Kamera Hakkında...</translation>
     </message>
     <message>
-        <location filename="mainwindow.py" line="90"/>
+        <location filename="mainwindow.py" line="91"/>
         <source>About Kamera</source>
         <translation>Kamera Hakkında</translation>
     </message>
     <message>
-        <location filename="mainwindow.py" line="90"/>
+        <location filename="mainwindow.py" line="91"/>
         <source>Kamera %1 - webcam photographer
 This software is released under the terms of GPL v3.
 http://kamera.googlecode.com
@@ -165,6 +165,11 @@ Uğur Çetin &lt;ugur.jnmbk at gmail.com&gt;</translation>
         <location filename="mainwindow.ui" line="88"/>
         <source>&amp;About...</source>
         <translation>&amp;Hakkında...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.py" line="50"/>
+        <source>No webcam found</source>
+        <translation>Web kamerası bulunamadı</translation>
     </message>
 </context>
 </TS>
