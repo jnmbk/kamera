@@ -52,6 +52,30 @@ class MyOpenCVWidget(OpenCVWidget):
             self.camThread.terminate()
             self.pushButton_save.setEnabled(False)
 
+class SmallImage(QtGui.QLabel):
+    def __init__(self, parent, filename):
+        QtGui.QLabel.__init__(self, parent)
+        pixmap = QtGui.QPixmap(filename)
+        self.setPixmap(pixmap.scaledToHeight(100))
+        self.setMaximumSize(self.pixmap().size())
+        self.setStyleSheet("border-right:2px solid gray;border-bottom:2px solid black")
+        self.deleteAction = QtGui.QAction(QtGui.QIcon(":icons/delete.png"), QtGui.QApplication.translate("MainWindow", "Delete"), self)
+        QtCore.QObject.connect(self.deleteAction, QtCore.SIGNAL("triggered(bool)"), self.delete)
+        self.filename = filename
+
+    def contextMenuEvent(self, event):
+        menu = QtGui.QMenu(self.filename, self)
+        menu.addAction(self.deleteAction)
+        menu.exec_(event.globalPos())
+
+    def delete(self):
+        file = QtCore.QFile(self.filename)
+        if file.remove():
+            self.hide()
+            #FIXME: Also remove the object from memory
+        else:
+            QtGui.QMessageBox.critical(self.parent(), QtGui.QApplication.translate("MainWindow", "Error"), file.errorString())
+
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
@@ -70,22 +94,26 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.imageListWidget = QtGui.QWidget()
         self.imageListWidget.setLayout(imageLayout)
         for imageFile in self.imageFiles:
-            self.addImage(QtGui.QPixmap(imageFile))
+            self.addImage(imageFile)
         self.scrollArea_photos.setWidget(self.imageListWidget)
 
-    def addImage(self, pixmap):
-        label = QtGui.QLabel(self.imageListWidget)
-        label.setPixmap(pixmap.scaledToHeight(100))
-        label.setMaximumSize(label.pixmap().size())
-        label.setStyleSheet("border-right:2px solid gray;border-bottom:2px solid black")
+    def addImage(self, filename):
+        label = SmallImage(self.imageListWidget, filename)
         self.imageListWidget.layout().insertWidget(0, label)
 
     @QtCore.pyqtSignature("bool")
     def on_pushButton_save_clicked(self):
         fileextension = self.settings.value("image/format", IMAGE_FORMAT).toString()
         filename = "kamera_%s.%s" % (QtCore.QDateTime.currentDateTime().toString("yyyyMMdd-hhmmss"), fileextension)
-        self.opencvwidget.snapShot().save(filename)
-        self.addImage(self.opencvwidget.pixmap)
+        snapShot = self.opencvwidget.snapShot()
+        if not snapShot.save(filename):
+            QtGui.QMessageBox.critical(
+                    self,
+                    QtGui.QApplication.translate("MainWindow", "Error"),
+                    QtGui.QApplication.translate("MainWindow", "Couln't save image to %1. Try reconfiguring the save directory from settings.").arg(filename),
+                    )
+        else:
+            self.addImage(filename)
 
     @QtCore.pyqtSignature("bool")
     def on_pushButton_about_clicked(self):
