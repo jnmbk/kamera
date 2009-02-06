@@ -58,7 +58,7 @@ class SmallImage(QtGui.QLabel):
         pixmap = QtGui.QPixmap(filename)
         self.setPixmap(pixmap.scaledToHeight(100))
         self.setMaximumSize(self.pixmap().size())
-        self.setStyleSheet("border-right:2px solid gray;border-bottom:2px solid black")
+        self.setStyleSheet("border:2px solid white")
         self.deleteAction = QtGui.QAction(QtGui.QIcon(":icons/delete.png"), QtGui.QApplication.translate("MainWindow", "Delete"), self)
         QtCore.QObject.connect(self.deleteAction, QtCore.SIGNAL("triggered(bool)"), self.delete)
         self.filename = filename
