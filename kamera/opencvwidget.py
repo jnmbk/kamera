@@ -26,13 +26,13 @@ class CamThread(QtCore.QThread):
         fps = highgui.cvGetCaptureProperty(camera, highgui.CV_CAP_PROP_FPS)
         highgui.cvSetCaptureProperty(camera, highgui.CV_CAP_PROP_FRAME_WIDTH, 640)
         highgui.cvSetCaptureProperty(camera, highgui.CV_CAP_PROP_FRAME_HEIGHT, 480)
-        #30 fps if cam gives no value, assume no webcam has more than 60 fps
+        #60 fps if cam gives no value
         if not 61 > fps > 0:
-            timeout = 33
+            self.timeout = 60
         else:
-            timeout = 1000 / fps
+            self.timeout = int(1000.0 / fps)
         while True:
-            self.msleep(timeout)
+            self.msleep(self.timeout)
             self.cvimage = highgui.cvQueryFrame(camera)
             self.emit(QtCore.SIGNAL("image"), (self.cvimage))
 
