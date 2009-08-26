@@ -24,7 +24,7 @@ from PyQt4 import QtGui
 from opencvwidget import OpenCVWidget, CamThread
 from ui_mainwindow import Ui_MainWindow
 from configwindow import ConfigWindow
-from defaultsettings import IMAGE_DIRECTORY, IMAGE_FORMAT, VIDEO_FLIP_LEFT_RIGHT, VIDEO_FLIP_TOP_BOTTOM
+from defaultsettings import IMAGE_DIRECTORY, IMAGE_FORMAT, VIDEO_FLIP_LEFT_RIGHT, VIDEO_FLIP_TOP_BOTTOM, VIDEO_FPS
 import __init__
 
 class MyOpenCVWidget(OpenCVWidget):
@@ -47,6 +47,7 @@ class MyOpenCVWidget(OpenCVWidget):
             self.image = ImageQt.ImageQt(image)
             self.pixmap = QtGui.QPixmap.fromImage(self.image)
             self.imageLabel.setPixmap(self.pixmap)
+            self.camThread.timeout = int(1000.0 / self.settings.value("video/fps", VIDEO_FPS).toInt()[0])
         except TypeError:
             self.emit(QtCore.SIGNAL("error"), QtGui.QApplication.translate("MainWindow", "No webcam found"))
             self.camThread.terminate()
